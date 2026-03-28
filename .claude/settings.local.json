@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"from playwright.sync_api import sync_playwright; print\\(''playwright available''\\)\")",
+      "Bash(python3 -c \"from selenium import webdriver; print\\(''selenium available''\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -m playwright install chromium)",
+      "Bash(python3:*)",
+      "Bash(npm view:*)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "Bash(curl -s https://registry.npmjs.org/@hugeicons/core-free-icons/4.0.0)",
+      "Bash(curl -s https://registry.npmjs.org/@hugeicons/react/1.1.6)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:unpkg.com)",
+      "Bash(curl -s \"https://unpkg.com/@hugeicons/core-free-icons@4.0.0/dist/types/index.d.ts\")"
+    ]
+  }
+}

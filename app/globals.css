@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── shadcn CSS variable tokens mapped to AMR Funds brand palette ── */
+@layer base {
+  :root {
+    --background: 90 33% 98%;         /* #FAFDF7 surface-base  */
+    --foreground: 100 40% 12%;        /* #1A2B12 brand-dark    */
+    --card: 0 0% 100%;
+    --card-foreground: 100 40% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 100 40% 12%;
+    --primary: 101 58% 60%;           /* #7ED957 brand-green   */
+    --primary-foreground: 100 40% 12%;
+    --secondary: 28 81% 73%;          /* #F4B183 brand-peach   */
+    --secondary-foreground: 100 40% 12%;
+    --muted: 110 24% 95%;             /* #F2F7EE surface-muted */
+    --muted-foreground: 100 20% 27%;  /* #3D5232 brand-dark-muted */
+    --accent: 110 24% 92%;
+    --accent-foreground: 100 40% 12%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 100 24% 88%;
+    --input: 100 24% 88%;
+    --ring: 101 58% 60%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-surface-base font-body text-brand-dark leading-body antialiased;
+  }
+}
+
+/* ── Grain texture overlay ── */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+html { scroll-behavior: smooth; }
+
+.spring-transition {
+  transition-property: transform, opacity, box-shadow;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: #F2F7EE; }
+::-webkit-scrollbar-thumb  { background: #7ED957; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #5CB838; }
+
+.nav-blur {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #7ED957 0%, #5CB838 50%, #3A8A1F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.service-card {
+  box-shadow:
+    0 1px 3px rgba(126, 217, 87, 0.04),
+    0 4px 12px rgba(126, 217, 87, 0.06);
+}
+.service-card:hover {
+  box-shadow:
+    0 4px 8px rgba(126, 217, 87, 0.08),
+    0 12px 32px rgba(126, 217, 87, 0.12),
+    0 0 0 1px rgba(126, 217, 87, 0.1);
+}
+
+.photo-frame {
+  box-shadow:
+    0 4px 12px rgba(26, 43, 18, 0.08),
+    0 16px 48px rgba(26, 43, 18, 0.12),
+    0 0 0 1px rgba(126, 217, 87, 0.15);
+}
+
+.step-connector { position: relative; }
+.step-connector::after {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: calc(50% + 32px);
+  width: calc(100% - 16px);
+  height: 2px;
+  background: linear-gradient(90deg, #7ED957, #F4B183);
+  opacity: 0.25;
+}
+
+*:focus-visible {
+  outline: 2px solid #7ED957;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

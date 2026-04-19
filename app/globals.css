@@ -68,10 +68,47 @@ html { scroll-behavior: smooth; }
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 
+/* ── Reduced motion support ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-fade-in-up { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Skip link (visible on focus only) ── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  background: #1A2B12;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 180ms ease;
+}
+.skip-link:focus-visible {
+  top: 16px;
+  outline: 2px solid #7ED957;
+  outline-offset: 3px;
+}
+
 ::-webkit-scrollbar        { width: 8px; }
 ::-webkit-scrollbar-track  { background: #F2F7EE; }
-::-webkit-scrollbar-thumb  { background: #7ED957; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #5CB838; }
+::-webkit-scrollbar-thumb  { background: #5CB838; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3A8A1F; }
+
+@media (forced-colors: active) {
+  ::-webkit-scrollbar-thumb { background: CanvasText; }
+}
 
 .nav-blur {
   backdrop-filter: blur(16px) saturate(180%);
@@ -79,7 +116,8 @@ html { scroll-behavior: smooth; }
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #7ED957 0%, #5CB838 50%, #3A8A1F 100%);
+  /* Start darker so the lightest end still meets ~3:1 large-text contrast on white */
+  background: linear-gradient(135deg, #5CB838 0%, #3A8A1F 60%, #2D6E15 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -116,8 +154,15 @@ html { scroll-behavior: smooth; }
   opacity: 0.25;
 }
 
+/* ── Focus indicator: dark-green core + light halo for contrast on any background ── */
 *:focus-visible {
-  outline: 2px solid #7ED957;
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid #2D6E15;
+  outline-offset: 3px;
+  border-radius: 6px;
+  box-shadow: 0 0 0 5px rgba(126, 217, 87, 0.45);
+}
+/* Dark surfaces (footer) — invert the pairing so the outline stays visible */
+footer *:focus-visible {
+  outline-color: #7ED957;
+  box-shadow: 0 0 0 5px rgba(26, 43, 18, 0.7);
 }
